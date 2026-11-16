@@ -1,0 +1,928 @@
+<!DOCTYPE html>
+<html lang="si">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+  <title>HM CV MAKING SERVICES</title>
+  <!-- Fonts & Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <!-- html2pdf for PDF generation -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <style>
+    /* ----- RESET & GLOBAL ----- */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      /* Beautiful blurred office/desk background */
+      background-image: url('https://images.unsplash.com/photo-1499951360447-b19be8fe80f5?q=80&w=2070&auto=format&fit=crop');
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      background-repeat: no-repeat;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 20px 16px 100px;
+      color: #1c1e24;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    /* Elegant dark/blue gradient overlay to make the glass pop */
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, rgba(15, 30, 55, 0.45) 0%, rgba(20, 40, 70, 0.25) 50%, rgba(10, 25, 45, 0.5) 100%);
+      z-index: -2;
+      pointer-events: none;
+    }
+
+    /* Floating glass light orbs (animated) */
+    body::after {
+      content: '';
+      position: fixed;
+      bottom: -15%;
+      right: -10%;
+      width: 80vw;
+      height: 80vw;
+      background: radial-gradient(circle, rgba(200, 230, 255, 0.4) 0%, rgba(170, 210, 255, 0.05) 80%);
+      border-radius: 50%;
+      filter: blur(100px);
+      z-index: -1;
+      animation: floatBubble 25s infinite alternate-reverse;
+      pointer-events: none;
+    }
+
+    @keyframes floatBubble {
+      0% { transform: translate(0, 0) scale(1); }
+      100% { transform: translate(5%, 5%) scale(1.15); }
+    }
+
+    /* ----- GLASS "OPEN LOOK" ANIMATION KEYFRAMES ----- */
+    @keyframes glassUnfold {
+      0% {
+        opacity: 0;
+        transform: perspective(1200px) rotateX(12deg) rotateY(-6deg) translateY(60px) scale(0.85);
+        filter: blur(12px);
+        box-shadow: 0 0 0 rgba(255, 255, 255, 0);
+      }
+      40% {
+        opacity: 0.85;
+        transform: perspective(1200px) rotateX(4deg) rotateY(-2deg) translateY(15px) scale(1.02);
+        filter: blur(3px);
+      }
+      70% {
+        opacity: 0.95;
+        transform: perspective(1200px) rotateX(-1deg) rotateY(1deg) translateY(-5px) scale(1.005);
+        filter: blur(0.5px);
+      }
+      100% {
+        opacity: 1;
+        transform: perspective(1200px) rotateX(0deg) rotateY(0deg) translateY(0) scale(1);
+        filter: blur(0);
+        box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.3), inset 0 1px 2px rgba(255, 255, 255, 0.8);
+      }
+    }
+
+    @keyframes itemReveal {
+      0% {
+        opacity: 0;
+        transform: translateY(30px) scale(0.94);
+        filter: blur(6px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+        filter: blur(0);
+      }
+    }
+
+    @keyframes shimmer {
+      0% { background-position: -200% 0; }
+      100% { background-position: 200% 0; }
+    }
+
+    /* ----- MAIN GLASS CONTAINER (with open animation) ----- */
+    .glass-container {
+      width: 100%;
+      max-width: 780px;
+      /* Slightly more transparent to let the background shine through */
+      background: rgba(255, 255, 255, 0.4);
+      backdrop-filter: blur(35px) saturate(200%);
+      -webkit-backdrop-filter: blur(35px) saturate(200%);
+      border-radius: 48px;
+      border: 1px solid rgba(255, 255, 255, 0.6);
+      padding: 36px 28px 42px;
+      margin: 20px 0 30px;
+      transition: all 0.3s ease;
+      animation: glassUnfold 1.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      transform-origin: center top;
+      will-change: transform, opacity, filter;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* subtle shimmer overlay on open */
+    .glass-container::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 100%;
+      background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.25) 50%, transparent 100%);
+      background-size: 200% 100%;
+      animation: shimmer 3s ease-in-out 0.8s;
+      pointer-events: none;
+      opacity: 0.6;
+    }
+
+    /* ----- WELCOME SECTION (staggered reveal) ----- */
+    .welcome {
+      text-align: center;
+      margin-bottom: 28px;
+      padding: 0 8px;
+      animation: itemReveal 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.2s both;
+    }
+
+    .welcome h1 {
+      font-size: 2.3rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      background: linear-gradient(135deg, #1e2b3c, #2c3e5a, #1f3a5f);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      line-height: 1.2;
+      margin-bottom: 10px;
+      text-shadow: 0 2px 15px rgba(255,255,255,0.5);
+    }
+
+    .welcome .subhead {
+      font-size: 1rem;
+      font-weight: 400;
+      color: #3a4b62;
+      background: rgba(255, 255, 255, 0.5);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      display: inline-block;
+      padding: 8px 24px;
+      border-radius: 60px;
+      border: 1px solid rgba(255, 255, 255, 0.7);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02);
+      animation: itemReveal 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.35s both;
+    }
+
+    /* ----- WHATSAPP BUTTON (TOP) ----- */
+    .whatsapp-top {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 30px;
+      animation: itemReveal 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.45s both;
+    }
+
+    .whatsapp-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      background: rgba(37, 211, 102, 0.95);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.5);
+      color: white;
+      font-weight: 600;
+      font-size: 1.1rem;
+      padding: 14px 32px;
+      border-radius: 50px;
+      text-decoration: none;
+      box-shadow: 0 12px 25px -8px rgba(37, 211, 102, 0.5), inset 0 1px 2px rgba(255, 255, 255, 0.4);
+      transition: all 0.3s cubic-bezier(0.2, 0.9, 0.3, 1);
+      letter-spacing: -0.01em;
+    }
+
+    .whatsapp-btn i {
+      font-size: 1.5rem;
+      filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
+    }
+
+    .whatsapp-btn:hover {
+      background: rgba(30, 190, 90, 1);
+      transform: translateY(-3px) scale(1.02);
+      box-shadow: 0 20px 30px -10px rgba(37, 211, 102, 0.6);
+    }
+
+    .whatsapp-btn:active {
+      transform: translateY(0) scale(0.98);
+    }
+
+    /* ----- FORM SECTION (staggered) ----- */
+    .form-section {
+      margin: 20px 0 28px;
+      animation: itemReveal 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.55s both;
+    }
+
+    .form-title {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 22px;
+      font-weight: 600;
+      font-size: 1.3rem;
+      color: #1e2e44;
+      padding-left: 4px;
+    }
+
+    .form-title i {
+      font-size: 1.6rem;
+      color: #3a6ea5;
+      background: rgba(255, 255, 255, 0.6);
+      padding: 8px;
+      border-radius: 18px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.02);
+    }
+
+    .form-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    .form-row {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      animation: itemReveal 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+    }
+
+    /* Stagger each form row */
+    .form-row:nth-child(1) { animation-delay: 0.6s; }
+    .form-row:nth-child(2) { animation-delay: 0.65s; }
+    .form-row:nth-child(3) { animation-delay: 0.7s; }
+    .form-row:nth-child(4) { animation-delay: 0.75s; }
+    .form-row:nth-child(5) { animation-delay: 0.8s; }
+    .form-row:nth-child(6) { animation-delay: 0.85s; }
+    .form-row:nth-child(7) { animation-delay: 0.9s; }
+    .form-row:nth-child(8) { animation-delay: 0.95s; }
+    .form-row:nth-child(9) { animation-delay: 1.0s; }
+    .form-row:nth-child(10) { animation-delay: 1.05s; }
+    .form-row:nth-child(11) { animation-delay: 1.1s; }
+    .form-row:nth-child(12) { animation-delay: 1.15s; }
+    .form-row:nth-child(13) { animation-delay: 1.2s; }
+    .form-row:nth-child(14) { animation-delay: 1.25s; }
+
+    .form-row label {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: #1f2c3f;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: baseline;
+      gap: 6px;
+      padding-left: 6px;
+    }
+
+    .form-row label .sinhala {
+      font-weight: 500;
+      color: #2a405c;
+    }
+
+    .form-row label .english {
+      font-weight: 400;
+      font-size: 0.8rem;
+      color: #4b627c;
+      opacity: 0.9;
+    }
+
+    /* Glass input fields */
+    .form-row input,
+    .form-row textarea,
+    .form-row select,
+    .file-upload-wrapper {
+      width: 100%;
+      padding: 16px 18px;
+      background: rgba(255, 255, 255, 0.5);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.8);
+      border-radius: 24px;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.95rem;
+      color: #1a2638;
+      outline: none;
+      transition: all 0.2s ease;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02), inset 0 1px 2px rgba(255,255,255,0.8);
+    }
+
+    .form-row input:focus,
+    .form-row textarea:focus {
+      background: rgba(255, 255, 255, 0.8);
+      border-color: rgba(90, 150, 220, 0.6);
+      box-shadow: 0 0 0 4px rgba(100, 160, 240, 0.15), inset 0 1px 2px rgba(255,255,255,0.8);
+    }
+
+    .form-row textarea {
+      resize: vertical;
+      min-height: 85px;
+    }
+
+    .file-upload-wrapper {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 16px;
+      background: rgba(255, 255, 255, 0.6);
+      border-radius: 30px;
+      cursor: pointer;
+    }
+
+    .file-upload-wrapper i {
+      font-size: 1.5rem;
+      color: #3a6ea5;
+    }
+
+    .file-upload-wrapper span {
+      font-size: 0.95rem;
+      color: #1f2c3f;
+      font-weight: 500;
+    }
+
+    .file-upload-wrapper input[type="file"] {
+      display: none;
+    }
+
+    .file-name {
+      font-size: 0.8rem;
+      color: #3d5775;
+      margin-left: 8px;
+      font-weight: 400;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 150px;
+    }
+
+    /* ----- ACTION BUTTONS (staggered) ----- */
+    .action-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      justify-content: center;
+      margin: 32px 0 18px;
+      animation: itemReveal 0.8s cubic-bezier(0.16, 1, 0.3, 1) 1.3s both;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 16px 32px;
+      border-radius: 60px;
+      font-weight: 600;
+      font-size: 1rem;
+      border: 1px solid rgba(255, 255, 255, 0.6);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      cursor: pointer;
+      transition: all 0.25s cubic-bezier(0.2, 0.9, 0.3, 1);
+      box-shadow: 0 8px 20px -6px rgba(0, 0, 0, 0.1), inset 0 1px 2px rgba(255,255,255,0.8);
+      letter-spacing: -0.01em;
+      flex: 1 1 auto;
+      min-width: 170px;
+    }
+
+    .btn i {
+      font-size: 1.2rem;
+    }
+
+    .btn-primary {
+      background: rgba(255, 255, 255, 0.7);
+      color: #1e3a5f;
+    }
+
+    .btn-primary:hover {
+      background: rgba(255, 255, 255, 0.95);
+      transform: translateY(-3px);
+      box-shadow: 0 16px 25px -8px rgba(60, 100, 160, 0.25);
+    }
+
+    .btn-secondary {
+      background: rgba(230, 240, 255, 0.65);
+      color: #1e3a5f;
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.9);
+      transform: translateY(-3px);
+    }
+
+    .btn-pdf {
+      background: linear-gradient(145deg, rgba(255, 255, 255, 0.9), rgba(240, 248, 255, 0.8));
+      color: #0f2c47;
+      font-weight: 700;
+    }
+
+    .btn-pdf i {
+      color: #d14545;
+    }
+
+    .btn-pdf:hover {
+      background: white;
+      transform: translateY(-3px) scale(1.02);
+      box-shadow: 0 20px 30px -10px rgba(200, 60, 60, 0.2);
+    }
+
+    .btn-wa {
+      background: rgba(37, 211, 102, 0.2);
+      border-color: rgba(37, 211, 102, 0.4);
+      color: #0d4a2b;
+    }
+
+    .btn-wa i {
+      color: #25D366;
+    }
+
+    .btn-wa:hover {
+      background: rgba(37, 211, 102, 0.35);
+      transform: translateY(-3px);
+    }
+
+    /* ----- PAYMENT SECTION (staggered) ----- */
+    .payment-section {
+      margin-top: 38px;
+      background: rgba(255, 255, 255, 0.4);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-radius: 32px;
+      padding: 24px 22px;
+      border: 1px solid rgba(255, 255, 255, 0.6);
+      box-shadow: 0 12px 25px -10px rgba(0, 0, 0, 0.05);
+      animation: itemReveal 0.9s cubic-bezier(0.16, 1, 0.3, 1) 1.45s both;
+    }
+
+    .payment-title {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 700;
+      font-size: 1.2rem;
+      color: #1c2e44;
+      margin-bottom: 18px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.6);
+    }
+
+    .payment-title i {
+      font-size: 1.5rem;
+      color: #1e5a8a;
+    }
+
+    .payment-detail {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 6px;
+      font-size: 1rem;
+      color: #172639;
+      border-radius: 16px;
+      transition: background 0.2s;
+      animation: itemReveal 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
+    }
+
+    .payment-detail:nth-child(1) { animation-delay: 1.5s; }
+    .payment-detail:nth-child(2) { animation-delay: 1.55s; }
+    .payment-detail:nth-child(3) { animation-delay: 1.6s; }
+    .payment-detail:nth-child(4) { animation-delay: 1.65s; }
+
+    .payment-detail i {
+      width: 28px;
+      color: #2a5588;
+      font-size: 1.2rem;
+    }
+
+    .payment-detail .label {
+      font-weight: 600;
+      min-width: 110px;
+      color: #1d3149;
+    }
+
+    .payment-detail .value {
+      font-weight: 500;
+      color: #1c2f45;
+      word-break: break-word;
+    }
+
+    .payment-note {
+      margin-top: 16px;
+      background: rgba(255, 245, 220, 0.5);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      padding: 16px 20px;
+      border-radius: 22px;
+      border: 1px solid rgba(255, 220, 150, 0.6);
+      font-size: 0.92rem;
+      color: #2e3b4e;
+      line-height: 1.6;
+      animation: itemReveal 0.7s cubic-bezier(0.16, 1, 0.3, 1) 1.7s both;
+    }
+
+    .payment-note i {
+      color: #af7d2b;
+      margin-right: 8px;
+    }
+
+    /* ----- RESPONSIVE ----- */
+    @media (max-width: 580px) {
+      .glass-container {
+        padding: 26px 16px 32px;
+        border-radius: 36px;
+      }
+      .welcome h1 {
+        font-size: 1.9rem;
+      }
+      .form-row label {
+        flex-direction: column;
+        gap: 2px;
+      }
+      .btn {
+        padding: 14px 20px;
+        font-size: 0.9rem;
+        min-width: 140px;
+      }
+      .action-buttons {
+        gap: 10px;
+      }
+      .payment-detail {
+        flex-wrap: wrap;
+        gap: 4px;
+      }
+      .payment-detail .label {
+        min-width: 100%;
+      }
+    }
+
+    /* ----- SCROLLBAR (subtle) ----- */
+    ::-webkit-scrollbar {
+      width: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 20px;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: rgba(120, 160, 210, 0.5);
+      border-radius: 20px;
+      backdrop-filter: blur(4px);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="glass-container" id="mainGlass">
+    <!-- Welcome -->
+    <div class="welcome">
+      <h1>HM CV MAKING SERVICES</h1>
+      <div class="subhead">
+        <i class="fas fa-file-alt" style="margin-right: 6px;"></i> ඔබේ CV එක අපි හදමු
+      </div>
+    </div>
+
+    <!-- WhatsApp Top Button & Contact Number -->
+    <div class="whatsapp-top">
+      <a href="https://wa.me/9472814416" target="_blank" class="whatsapp-btn">
+        <i class="fab fa-whatsapp"></i> Contact Us on WhatsApp
+      </a>
+    </div>
+    <div style="text-align: center; margin-bottom: 24px; font-size: 1.05rem; font-weight: 500; color: #1e3a5f; background: rgba(255,255,255,0.55); backdrop-filter: blur(10px); padding: 10px 20px; border-radius: 60px; border: 1px solid rgba(255,255,255,0.7); display: inline-block; width: auto; margin-left: auto; margin-right: auto; animation: itemReveal 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.5s both;">
+      <i class="fas fa-phone-alt" style="margin-right: 8px; color: #25D366;"></i>
+      <span style="letter-spacing: 0.5px;">072 814 4416</span>
+      <span style="font-weight: 400; font-size: 0.9rem; margin-left: 6px; opacity: 0.8;">(Contact)</span>
+    </div>
+
+    <!-- Form Section -->
+    <div class="form-section">
+      <div class="form-title">
+        <i class="fas fa-edit"></i> ඔබේ තොරතුරු ඇතුළත් කරන්න
+      </div>
+      <div class="form-grid" id="cvForm">
+        <!-- 1. Full Name -->
+        <div class="form-row">
+          <label><span class="sinhala">සම්පූර්ණ නම</span> <span class="english">– Full Name</span></label>
+          <input type="text" id="fullName" placeholder="Ex: Nimal Perera" autocomplete="name">
+        </div>
+        <!-- 2. Contact Number -->
+        <div class="form-row">
+          <label><span class="sinhala">දුරකථන අංකය</span> <span class="english">– Contact Number</span></label>
+          <input type="tel" id="contactNumber" placeholder="07X XXX XXXX" autocomplete="tel">
+        </div>
+        <!-- 3. Email -->
+        <div class="form-row">
+          <label><span class="sinhala">Email ලිපිනය</span> <span class="english">– Email Address</span></label>
+          <input type="email" id="email" placeholder="example@email.com" autocomplete="email">
+        </div>
+        <!-- 4. Home Address -->
+        <div class="form-row">
+          <label><span class="sinhala">ලිපිනය</span> <span class="english">– Home Address</span></label>
+          <input type="text" id="address" placeholder="No, Street, City" autocomplete="street-address">
+        </div>
+        <!-- 5. Desired Job Position -->
+        <div class="form-row">
+          <label><span class="sinhala">ඔබට අවශ්‍ය රැකියා තනතුර</span> <span class="english">– Desired Job Position</span></label>
+          <input type="text" id="jobPosition" placeholder="Ex: Software Engineer">
+        </div>
+        <!-- 6. Date of Birth -->
+        <div class="form-row">
+          <label><span class="sinhala">උපන් දිනය</span> <span class="english">– Date of Birth</span></label>
+          <input type="date" id="dob">
+        </div>
+        <!-- 7. Educational Qualifications -->
+        <div class="form-row">
+          <label><span class="sinhala">අධ්‍යාපන සුදුසුකම් (OL/AL ලකුණු, පාසල, වර්ෂය)</span> <span class="english">– Educational Qualifications</span></label>
+          <textarea id="education" placeholder="O/L: 9A, Ananda College, 2020... A/L: 3A, ..."></textarea>
+        </div>
+        <!-- 8. Professional Qualifications -->
+        <div class="form-row">
+          <label><span class="sinhala">වෘත්තීය සුදුසුකම් සහ පාඨමාලා (තිබේනම් පමණක්)</span> <span class="english">– Professional Qualifications (If Available)</span></label>
+          <textarea id="professional" placeholder="e.g., Diploma in IT, Certificate in Web Development"></textarea>
+        </div>
+        <!-- 9. Work Experience -->
+        <div class="form-row">
+          <label><span class="sinhala">රැකියා පළපුරුද්ද (තිබේනම් පමණක්)</span> <span class="english">– Work Experience (If Available)</span></label>
+          <textarea id="workExperience" placeholder="Company, Role, Duration"></textarea>
+        </div>
+        <!-- 10. Training & Internship -->
+        <div class="form-row">
+          <label><span class="sinhala">පුහුණුවීම් සහ Internship පළපුරුද්ද (තිබේනම් පමණක්)</span> <span class="english">– Training & Internship Experience (If Available)</span></label>
+          <textarea id="training" placeholder="Training programme, Internship at ..."></textarea>
+        </div>
+        <!-- 11. Skills -->
+        <div class="form-row">
+          <label><span class="sinhala">Skills</span> <span class="english">– Skills and Abilities</span></label>
+          <textarea id="skills" placeholder="e.g., Microsoft Office, Java, Communication"></textarea>
+        </div>
+        <!-- 12. Language Proficiency -->
+        <div class="form-row">
+          <label><span class="sinhala">භාෂා දැනුම (English, Tamil & Others)</span> <span class="english">– Language Proficiency</span></label>
+          <textarea id="languages" placeholder="English (Fluent), Tamil (Basic), Sinhala (Native)"></textarea>
+        </div>
+        <!-- 13. Photograph Upload -->
+        <div class="form-row">
+          <label><span class="sinhala">CV එකට ඇතුළත් කිරීමට අවශ්‍ය ඡායාරූපය</span> <span class="english">– Photograph to Be Included</span></label>
+          <div class="file-upload-wrapper" onclick="document.getElementById('photoInput').click()">
+            <i class="fas fa-camera"></i>
+            <span>Upload Photo</span>
+            <span id="fileNameDisplay" class="file-name">No file selected</span>
+          </div>
+          <input type="file" id="photoInput" accept="image/*" style="display: none;">
+        </div>
+        <!-- 14. Certificates & Awards -->
+        <div class="form-row">
+          <label><span class="sinhala">ලබාගත් සහතික හා සම්මාන</span> <span class="english">– Certificates and Awards Received</span></label>
+          <textarea id="certificates" placeholder="e.g., Best Employee 2023, Diploma in IT"></textarea>
+        </div>
+      </div>
+    </div>
+
+    <!-- Action Buttons -->
+    <div class="action-buttons">
+      <button class="btn btn-pdf" id="downloadPdfBtn">
+        <i class="fas fa-file-pdf"></i> Download Details as PDF
+      </button>
+      <button class="btn btn-secondary" id="clearFormBtn">
+        <i class="fas fa-undo-alt"></i> Clear Form
+      </button>
+      <button class="btn btn-wa" id="shareWaBtn">
+        <i class="fab fa-whatsapp"></i> Share PDF on WhatsApp
+      </button>
+    </div>
+
+    <!-- Payment Details Section -->
+    <div class="payment-section">
+      <div class="payment-title">
+        <i class="fas fa-credit-card"></i> ගෙවීම් විස්තර | Payment Details
+      </div>
+      <div class="payment-detail">
+        <i class="fas fa-university"></i>
+        <span class="label">🏦 Bank:</span>
+        <span class="value">People's Bank</span>
+      </div>
+      <div class="payment-detail">
+        <i class="fas fa-user-circle"></i>
+        <span class="label">👤 Account Name:</span>
+        <span class="value">GVHW Perera</span>
+      </div>
+      <div class="payment-detail">
+        <i class="fas fa-hashtag"></i>
+        <span class="label">🔢 Account Number:</span>
+        <span class="value">121200310005114</span>
+      </div>
+      <div class="payment-note">
+        <i class="fas fa-info-circle"></i> 
+        📩 Payment එක සිදු කළ පසු receipt එක අප වෙත එවන්න. <br>
+        📱 Online transfer නම් screenshot එකක් එවන්න. <br>
+        <span style="font-size:0.85rem; opacity:0.9;">After completing the payment, please send us the payment receipt. If you make an online bank transfer, please send us a screenshot of the transaction.</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Hidden PDF Preview Container -->
+  <div id="pdf-preview" style="width: 210mm; min-height: 297mm; padding: 18mm 20mm; background: white; font-family: 'Inter', Arial, sans-serif; color: #1a2638; box-sizing: border-box; position: fixed; left: -9999px; top: 0;">
+    <!-- Content will be injected dynamically -->
+  </div>
+
+  <script>
+    (function() {
+      // --- Elements ---
+      const photoInput = document.getElementById('photoInput');
+      const fileNameDisplay = document.getElementById('fileNameDisplay');
+      const downloadPdfBtn = document.getElementById('downloadPdfBtn');
+      const clearFormBtn = document.getElementById('clearFormBtn');
+      const shareWaBtn = document.getElementById('shareWaBtn');
+      const pdfPreview = document.getElementById('pdf-preview');
+
+      let uploadedPhotoDataUrl = null;
+
+      // --- Photo upload display ---
+      photoInput.addEventListener('change', function(e) {
+        const file = e.target.files[0];
+        if (file) {
+          fileNameDisplay.textContent = file.name.length > 20 ? file.name.substring(0, 18) + '…' : file.name;
+          const reader = new FileReader();
+          reader.onload = function(ev) {
+            uploadedPhotoDataUrl = ev.target.result;
+          };
+          reader.readAsDataURL(file);
+        } else {
+          fileNameDisplay.textContent = 'No file selected';
+          uploadedPhotoDataUrl = null;
+        }
+      });
+
+      // --- Clear form ---
+      clearFormBtn.addEventListener('click', function() {
+        const inputs = document.querySelectorAll('#cvForm input, #cvForm textarea');
+        inputs.forEach(input => {
+          if (input.type !== 'file') input.value = '';
+        });
+        photoInput.value = '';
+        fileNameDisplay.textContent = 'No file selected';
+        uploadedPhotoDataUrl = null;
+        document.getElementById('dob').value = '';
+      });
+
+      // --- Helper: get all form values ---
+      function getFormData() {
+        return {
+          fullName: document.getElementById('fullName').value.trim(),
+          contact: document.getElementById('contactNumber').value.trim(),
+          email: document.getElementById('email').value.trim(),
+          address: document.getElementById('address').value.trim(),
+          jobPosition: document.getElementById('jobPosition').value.trim(),
+          dob: document.getElementById('dob').value,
+          education: document.getElementById('education').value.trim(),
+          professional: document.getElementById('professional').value.trim(),
+          workExperience: document.getElementById('workExperience').value.trim(),
+          training: document.getElementById('training').value.trim(),
+          skills: document.getElementById('skills').value.trim(),
+          languages: document.getElementById('languages').value.trim(),
+          certificates: document.getElementById('certificates').value.trim(),
+        };
+      }
+
+      // --- Build PDF content (HTML) with professional single-page layout ---
+      function buildPdfHtml() {
+        const data = getFormData();
+        const photoHtml = uploadedPhotoDataUrl 
+          ? `<img src="${uploadedPhotoDataUrl}" style="width: 90px; height: 90px; border-radius: 50%; object-fit: cover; border: 2px solid #2a5588; margin-bottom: 10px;" alt="Photo">` 
+          : '';
+
+        let dobFormatted = data.dob;
+        if (data.dob) {
+          const d = new Date(data.dob);
+          if (!isNaN(d)) {
+            dobFormatted = d.toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' });
+          }
+        }
+
+        const row = (labelEn, labelSi, value) => {
+          if (!value || value.trim() === '') return '';
+          return `<tr>
+            <td style="padding: 5px 8px 5px 0; font-weight: 600; width: 38%; font-size: 10.5pt; color: #1e2e44; vertical-align: top;">${labelEn} <span style="font-weight: 400; color: #3a5a7a; font-size: 9pt;">(${labelSi})</span></td>
+            <td style="padding: 5px 0; font-size: 10.5pt; color: #1a2638; vertical-align: top; white-space: pre-wrap; word-break: break-word;">${value.replace(/\n/g, '<br>')}</td>
+          </tr>`;
+        };
+
+        return `
+          <div style="font-family: 'Inter', Arial, sans-serif; max-width: 100%; background: white; border-radius: 12px; padding: 0;">
+            <div style="display: flex; align-items: center; gap: 24px; margin-bottom: 18px; border-bottom: 3px solid #2a5588; padding-bottom: 14px;">
+              <div style="flex-shrink: 0;">${photoHtml}</div>
+              <div>
+                <h1 style="font-size: 26pt; font-weight: 700; margin: 0 0 4px; color: #0f2c47; letter-spacing: -0.5px;">${data.fullName || 'Name Not Provided'}</h1>
+                <p style="font-size: 12pt; font-weight: 500; margin: 0; color: #2a5588;">${data.jobPosition || 'Desired Position'}</p>
+              </div>
+            </div>
+
+            <div style="display: flex; flex-wrap: wrap; gap: 12px 30px; margin-bottom: 20px; background: #f0f6fe; padding: 10px 16px; border-radius: 14px;">
+              ${data.contact ? `<span style="font-size: 10.5pt;"><i style="color: #2a5588; margin-right: 6px;">📞</i> ${data.contact}</span>` : ''}
+              ${data.email ? `<span style="font-size: 10.5pt;"><i style="color: #2a5588; margin-right: 6px;">✉️</i> ${data.email}</span>` : ''}
+              ${dobFormatted ? `<span style="font-size: 10.5pt;"><i style="color: #2a5588; margin-right: 6px;">🎂</i> ${dobFormatted}</span>` : ''}
+              ${data.address ? `<span style="font-size: 10.5pt;"><i style="color: #2a5588; margin-right: 6px;">🏠</i> ${data.address}</span>` : ''}
+            </div>
+
+            <table style="width: 100%; border-collapse: collapse; margin-top: 6px;">
+              ${row('Educational Qualifications', 'අධ්‍යාපන සුදුසුකම්', data.education)}
+              ${row('Professional Qualifications', 'වෘත්තීය සුදුසුකම්', data.professional)}
+              ${row('Work Experience', 'රැකියා පළපුරුද්ද', data.workExperience)}
+              ${row('Training & Internships', 'පුහුණුවීම් සහ Internship', data.training)}
+              ${row('Skills', 'Skills', data.skills)}
+              ${row('Language Proficiency', 'භාෂා දැනුම', data.languages)}
+              ${row('Certificates & Awards', 'සහතික හා සම්මාන', data.certificates)}
+            </table>
+
+            <div style="margin-top: 24px; font-size: 8pt; color: #6a7f9a; text-align: center; border-top: 1px solid #d0e0f0; padding-top: 12px;">
+              Prepared via HM CV MAKING SERVICES · www.hmcvmakingservices.lk · Contact: 072 814 4416
+            </div>
+          </div>
+        `;
+      }
+
+      // --- Generate PDF (returns promise) ---
+      function generatePdf() {
+        return new Promise((resolve, reject) => {
+          const htmlContent = buildPdfHtml();
+          pdfPreview.innerHTML = htmlContent;
+
+          const opt = {
+            margin: [0.5, 0.5, 0.5, 0.5],
+            filename: `CV_${getFormData().fullName || 'Details'}.pdf`,
+            image: { type: 'jpeg', quality: 0.98 },
+            html2canvas: { scale: 2, useCORS: true, letterRendering: true, logging: false },
+            jsPDF: { unit: 'in', format: 'a4', orientation: 'portrait' }
+          };
+
+          html2pdf().set(opt).from(pdfPreview).save()
+            .then(() => resolve())
+            .catch((err) => {
+              console.error('PDF error:', err);
+              reject(err);
+            });
+        });
+      }
+
+      // --- Download PDF button ---
+      downloadPdfBtn.addEventListener('click', async function() {
+        try {
+          await generatePdf();
+        } catch (e) {
+          alert('PDF generation failed. Please try again.');
+        }
+      });
+
+      // --- Share PDF on WhatsApp ---
+      shareWaBtn.addEventListener('click', async function() {
+        try {
+          await generatePdf();
+          const name = getFormData().fullName || 'Customer';
+          const message = encodeURIComponent(`Hello, I have generated my CV details PDF (${name}). Please find it attached. I would like to proceed with the CV making service.`);
+          window.open(`https://wa.me/9472814416?text=${message}`, '_blank');
+        } catch (e) {
+          alert('Could not generate PDF. Please try again.');
+        }
+      });
+
+      // --- Add smooth focus animations for inputs (visual only) ---
+      const inputs = document.querySelectorAll('input, textarea');
+      inputs.forEach(input => {
+        input.addEventListener('focus', function() {
+          this.parentElement.style.transition = 'all 0.2s';
+        });
+      });
+
+      // --- Re-trigger the glass "open" animation when clicking the main container ---
+      const mainGlass = document.getElementById('mainGlass');
+      mainGlass.addEventListener('click', function(e) {
+        if (e.target === mainGlass || e.target.classList.contains('glass-container')) {
+          mainGlass.style.animation = 'none';
+          void mainGlass.offsetWidth;
+          mainGlass.style.animation = 'glassUnfold 1s cubic-bezier(0.16, 1, 0.3, 1) forwards';
+        }
+      });
+
+    })();
+  </script>
+</body>
+</html>
